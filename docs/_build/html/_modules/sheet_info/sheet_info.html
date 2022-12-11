@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sheet_info.sheet_info &mdash; python-openpyxl  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> python-openpyxl
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">my_class</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">python-openpyxl</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sheet_info.sheet_info</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sheet_info.sheet_info</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">openpyxl</span>
+<span class="kn">import</span> <span class="nn">row_col_operator</span>
+
+<div class="viewcode-block" id="SheetInfo"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo">[docs]</a><span class="k">class</span> <span class="nc">SheetInfo</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;This class has the information of the Excel worksheet.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__wb</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__wb_Name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__ws_Name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__start_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__start_col</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__end_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__end_col</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__result_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__result_col</span> <span class="o">=</span> <span class="mi">0</span>
+  
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_wb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wb</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_ws</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_wb_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wb_name</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_ws_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws_name</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_start_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__start_row</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_start_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__start_col</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_end_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_row</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_end_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_col</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_key_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_key_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_target_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_target_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_result_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__result_row</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">get_result_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__result_col</span>
+
+  <span class="nd">@get_wb</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_wb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wb</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__wb</span> <span class="o">=</span> <span class="n">wb</span>
+
+  <span class="nd">@get_ws</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_ws</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ws</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span> <span class="o">=</span> <span class="n">ws</span>
+
+  <span class="nd">@get_wb_name</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_wb_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wb_name</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__wb_name</span> <span class="o">=</span> <span class="n">wb_name</span>
+
+  <span class="nd">@get_ws_name</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_ws_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ws_name</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__ws_name</span> <span class="o">=</span> <span class="n">ws_name</span>
+
+  <span class="nd">@get_start_row</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_start_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_row</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__start_row</span> <span class="o">=</span> <span class="n">start_row</span>
+
+  <span class="nd">@get_start_col</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_start_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_col</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__start_col</span> <span class="o">=</span> <span class="n">start_col</span>
+
+  <span class="nd">@get_end_row</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_end_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end_row</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__end_row</span> <span class="o">=</span> <span class="n">end_row</span>
+
+  <span class="nd">@get_end_col</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_end_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end_col</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__end_col</span> <span class="o">=</span> <span class="n">end_col</span>
+
+  <span class="nd">@get_key_row</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_key_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_row</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span> <span class="o">=</span> <span class="n">key_row</span>
+
+  <span class="nd">@get_key_col</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_key_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_col</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span> <span class="o">=</span> <span class="n">key_col</span>
+
+  <span class="nd">@get_target_row</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_target_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_row</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span> <span class="o">=</span> <span class="n">target_row</span>
+
+  <span class="nd">@get_target_col</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_target_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_col</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span> <span class="o">=</span> <span class="n">target_col</span>
+
+  <span class="nd">@get_result_row</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_result_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_row</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__result_row</span> <span class="o">=</span> <span class="n">result_row</span>
+
+  <span class="nd">@get_target_col</span><span class="o">.</span><span class="n">setter</span>
+  <span class="k">def</span> <span class="nf">set_result_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result_col</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__result_col</span> <span class="o">=</span> <span class="n">result_col</span>
+
+<div class="viewcode-block" id="SheetInfo.check_my_value"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.check_my_value">[docs]</a>  <span class="k">def</span> <span class="nf">check_my_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;check my value and determine to continue</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: determine to continue </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wb_name</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws_name</span><span class="p">):</span>
+      <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">flag</span></div>
+
+<div class="viewcode-block" id="SheetInfo.check_my_value_row"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.check_my_value_row">[docs]</a>  <span class="k">def</span> <span class="nf">check_my_value_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;check my value of row</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: determine to continue</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span><span class="p">):</span>
+      <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">flag</span></div>
+
+<div class="viewcode-block" id="SheetInfo.check_my_value_col"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.check_my_value_col">[docs]</a>  <span class="k">def</span> <span class="nf">check_my_value_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;check my value of col</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: determine to continue</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span><span class="p">):</span>
+      <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">flag</span></div>
+
+<div class="viewcode-block" id="SheetInfo.set_sheet_info"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.set_sheet_info">[docs]</a>  <span class="k">def</span> <span class="nf">set_sheet_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;set sheet info</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        nothing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_my_value</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_wb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_wb_name</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_ws</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_ws_name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;err&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SheetInfo.set_row_col_info"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.set_row_col_info">[docs]</a>  <span class="k">def</span> <span class="nf">set_row_col_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;set row and column</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        nothing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">RowColOperator</span> <span class="o">=</span> <span class="n">row_col_operator</span><span class="o">.</span><span class="n">RowColOperator</span><span class="p">()</span>
+    <span class="n">RowColOperator</span><span class="o">.</span><span class="n">set_ws</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ws</span><span class="p">)</span>
+    <span class="n">RowColOperator</span><span class="o">.</span><span class="n">set_target_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span><span class="p">)</span>
+    <span class="n">RowColOperator</span><span class="o">.</span><span class="n">set_target_col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_row</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span><span class="p">)</span> \
+    <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_my_value_row</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_end_row</span><span class="p">(</span><span class="n">RowColOperator</span><span class="o">.</span><span class="n">get_end_row</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_col</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span><span class="p">)</span> \
+    <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_my_value_col</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_end_col</span><span class="p">(</span><span class="n">RowColOperator</span><span class="o">.</span><span class="n">get_end_col</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ShunMare.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
