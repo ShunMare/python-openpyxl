@@ -1,5 +1,5 @@
 import openpyxl
-import row_col_operator
+from row_col_operator.row_col_operator import RowColOperator
 
 class SheetInfo:
   """This class has the information of the Excel worksheet."""
@@ -133,69 +133,54 @@ class SheetInfo:
     self.__result_col = result_col
 
   def check_my_value(self):
-    """check my value and determine to continue
+    """Check my value and determine to continue.
+    This function is for internal use only.
+
+    Note:
+        The bellow variable must be set value before this function call.
+        :data:`self.__wb_name`, :data:`self.__ws_name`
+
+    Args:
+        Nothing.
 
     Returns:
-        bool: determine to continue 
+        bool: If able to get end row, return True.
     """
     if ('' == self.__wb_name) or ('' == self.__ws_name):
-      flag = False
+      print("ERROR: Not set workbook name and worksheet name.")
+      return False
     else:
-      flag = True
-    return flag
-
-  def check_my_value_row(self):
-    """check my value of row
-
-    Returns:
-        bool: determine to continue
-    """
-    if ('' == self.__ws) or (0 == self.__key_row):
-      flag = False
-    else:
-      flag = True
-    return flag
-
-  def check_my_value_col(self):
-    """check my value of col
-
-    Returns:
-        bool: determine to continue
-    """
-    if ('' == self.__ws) or (0 == self.__key_col):
-      flag = False
-    else:
-      flag = True
-    return flag
+      return True
 
   def set_sheet_info(self):
-    """set sheet info
+    """Set workbook and worksheet of target sheet. 
 
-    Returns:
-        nothing
+    Note:
+        To check function(:func:`check_my_value`) is called before set workbook and worksheet.
+
+    Args:
+        Nothing.
     """
-    if self.check_my_value:
-      self.set_wb(self.set_wb_name)
-      self.set_ws(self.set_ws_name)
-    else:
-      print('err')
+    if not self.check_my_value: return
+    self.set_wb(self.set_wb_name)
+    self.set_ws(self.set_ws_name)
 
   def set_row_col_info(self):
-    """set row and column
+    """Set end of row and column. 
+    This function use the bellow class.
+    :class:`RowColOperator()`
 
-    Returns:
-        nothing
+    Args:
+        Nothing.
     """
 
-    RowColOperator = row_col_operator.RowColOperator()
-    RowColOperator.set_ws(self.__ws)
-    RowColOperator.set_target_row(self.__target_row)
-    RowColOperator.set_target_col(self.__target_col)
+    row_col_operator = RowColOperator()
+    row_col_operator.set_ws = self.__ws
+    row_col_operator.set_target_row = self.__target_row
+    row_col_operator.set_target_col = self.__target_col
 
-    if (0 == self.__end_row) and (0 != self.__key_col) \
-    and (self.check_my_value_row):
-      self.set_end_row(RowColOperator.get_end_row)
+    if (0 == self.__end_row) and (0 != self.__target_col):
+      self.set_end_row = row_col_operator.get_end_row
     
-    if (0 == self.__end_col) and (0 != self.__key_row) \
-    and (self.check_my_value_col):
-      self.set_end_col(RowColOperator.get_end_col)
+    if (0 == self.__end_col) and (0 != self.__target_row):
+      self.set_end_col = row_col_operator.get_end_col

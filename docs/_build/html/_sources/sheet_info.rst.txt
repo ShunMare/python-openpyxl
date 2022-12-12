@@ -4,13 +4,10 @@ sheet\_info package
 Submodules
 ----------
 
-sheet\_info.sheet\_info module
-------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: sheet_info.sheet_info
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   sheet_info.sheet_info
 
 Module contents
 ---------------

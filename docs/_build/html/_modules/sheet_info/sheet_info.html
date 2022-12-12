@@ -38,7 +38,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">my_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">1. my_class</a></li>
 </ul>
 
         </div>
@@ -67,7 +67,7 @@
              
   <h1>Source code for sheet_info.sheet_info</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">openpyxl</span>
-<span class="kn">import</span> <span class="nn">row_col_operator</span>
+<span class="kn">from</span> <span class="nn">row_col_operator.row_col_operator</span> <span class="kn">import</span> <span class="n">RowColOperator</span>
 
 <div class="viewcode-block" id="SheetInfo"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo">[docs]</a><span class="k">class</span> <span class="nc">SheetInfo</span><span class="p">:</span>
   <span class="sd">&quot;&quot;&quot;This class has the information of the Excel worksheet.&quot;&quot;&quot;</span>
@@ -201,72 +201,57 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">__result_col</span> <span class="o">=</span> <span class="n">result_col</span>
 
 <div class="viewcode-block" id="SheetInfo.check_my_value"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.check_my_value">[docs]</a>  <span class="k">def</span> <span class="nf">check_my_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;check my value and determine to continue</span>
+    <span class="sd">&quot;&quot;&quot;Check my value and determine to continue.</span>
+<span class="sd">    This function is for internal use only.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The bellow variable must be set value before this function call.</span>
+<span class="sd">        :data:`self.__wb_name`, :data:`self.__ws_name`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Nothing.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        bool: determine to continue </span>
+<span class="sd">        bool: If able to get end row, return True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wb_name</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws_name</span><span class="p">):</span>
-      <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: Not set workbook name and worksheet name.&quot;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="kc">False</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">flag</span></div>
-
-<div class="viewcode-block" id="SheetInfo.check_my_value_row"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.check_my_value_row">[docs]</a>  <span class="k">def</span> <span class="nf">check_my_value_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;check my value of row</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        bool: determine to continue</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span><span class="p">):</span>
-      <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">flag</span></div>
-
-<div class="viewcode-block" id="SheetInfo.check_my_value_col"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.check_my_value_col">[docs]</a>  <span class="k">def</span> <span class="nf">check_my_value_col</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;check my value of col</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        bool: determine to continue</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span><span class="p">):</span>
-      <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">flag</span></div>
+      <span class="k">return</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="SheetInfo.set_sheet_info"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.set_sheet_info">[docs]</a>  <span class="k">def</span> <span class="nf">set_sheet_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;set sheet info</span>
+    <span class="sd">&quot;&quot;&quot;Set workbook and worksheet of target sheet. </span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        nothing</span>
+<span class="sd">    Note:</span>
+<span class="sd">        To check function(:func:`check_my_value`) is called before set workbook and worksheet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_my_value</span><span class="p">:</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">set_wb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_wb_name</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">set_ws</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_ws_name</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;err&#39;</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_my_value</span><span class="p">:</span> <span class="k">return</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_wb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_wb_name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_ws</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_ws_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SheetInfo.set_row_col_info"><a class="viewcode-back" href="../../sheet_info.html#sheet_info.sheet_info.SheetInfo.set_row_col_info">[docs]</a>  <span class="k">def</span> <span class="nf">set_row_col_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;set row and column</span>
+    <span class="sd">&quot;&quot;&quot;Set end of row and column. </span>
+<span class="sd">    This function use the bellow class.</span>
+<span class="sd">    :class:`RowColOperator()`</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        nothing</span>
+<span class="sd">    Args:</span>
+<span class="sd">        Nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">RowColOperator</span> <span class="o">=</span> <span class="n">row_col_operator</span><span class="o">.</span><span class="n">RowColOperator</span><span class="p">()</span>
-    <span class="n">RowColOperator</span><span class="o">.</span><span class="n">set_ws</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ws</span><span class="p">)</span>
-    <span class="n">RowColOperator</span><span class="o">.</span><span class="n">set_target_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span><span class="p">)</span>
-    <span class="n">RowColOperator</span><span class="o">.</span><span class="n">set_target_col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span><span class="p">)</span>
+    <span class="n">row_col_operator</span> <span class="o">=</span> <span class="n">RowColOperator</span><span class="p">()</span>
+    <span class="n">row_col_operator</span><span class="o">.</span><span class="n">set_ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ws</span>
+    <span class="n">row_col_operator</span><span class="o">.</span><span class="n">set_target_row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span>
+    <span class="n">row_col_operator</span><span class="o">.</span><span class="n">set_target_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_row</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_col</span><span class="p">)</span> \
-    <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_my_value_row</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">set_end_row</span><span class="p">(</span><span class="n">RowColOperator</span><span class="o">.</span><span class="n">get_end_row</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_row</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_col</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_end_row</span> <span class="o">=</span> <span class="n">row_col_operator</span><span class="o">.</span><span class="n">get_end_row</span>
     
-    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_col</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key_row</span><span class="p">)</span> \
-    <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_my_value_col</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">set_end_col</span><span class="p">(</span><span class="n">RowColOperator</span><span class="o">.</span><span class="n">get_end_col</span><span class="p">)</span></div></div>
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__end_col</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_row</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_end_col</span> <span class="o">=</span> <span class="n">row_col_operator</span><span class="o">.</span><span class="n">get_end_col</span></div></div>
 </pre></div>
 
            </div>
