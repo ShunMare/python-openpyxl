@@ -89,7 +89,7 @@ class RowColOperator:
         ::
     """
     if not self.check_my_value_row(): return
-    for cur_row in reversed(range(self.__target_col, self.__ws.max_row + 1)):
+    for cur_row in reversed(range(1, self.__ws.max_row + 1)):
       if self.__ws.cell(row=cur_row, column=self.__target_col).value:
         return cur_row
     return 1
