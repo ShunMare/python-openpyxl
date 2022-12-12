@@ -38,7 +38,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">my_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">1. sheet_info</a></li>
 </ul>
 
         </div>
@@ -132,7 +132,7 @@
 
 <span class="sd">    Note:</span>
 <span class="sd">        The bellow variable must be set value before this function call.</span>
-<span class="sd">        :obj:`self.__ws`, :obj:`self.__target_col`</span>
+<span class="sd">        :data:`self.__ws`, :data:`self.__target_col`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        Nothing.</span>
@@ -149,11 +149,11 @@
 
 <span class="sd">        ::</span>
 
-<span class="sd">          row_col_operator = RowColOperator()</span>
-<span class="sd">          row_col_operator.set_ws = openpyxl.load_workbook(&#39;workbook_name&#39;)[&#39;worksheet_name&#39;]</span>
-<span class="sd">          row_col_operator.set_target_col = 3</span>
-<span class="sd">          print(row_col_operator.get_end_row())</span>
-<span class="sd">        </span>
+<span class="sd">            row_col_operator = RowColOperator()</span>
+<span class="sd">            row_col_operator.set_ws = openpyxl.load_workbook(&#39;workbook_name&#39;)[&#39;worksheet_name&#39;]</span>
+<span class="sd">            row_col_operator.set_target_col = 3</span>
+<span class="sd">            print(row_col_operator.get_end_row())</span>
+
 <span class="sd">        ::</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_my_value_row</span><span class="p">():</span> <span class="k">return</span>
@@ -168,7 +168,7 @@
 
 <span class="sd">    Note:</span>
 <span class="sd">        The bellow variable must be set value before this function call.</span>
-<span class="sd">        :obj:`self.__ws`, :obj:`self.__target_row`</span>
+<span class="sd">        :data:`self.__ws`, :data:`self.__target_row`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        Nothing.</span>
@@ -185,11 +185,11 @@
 
 <span class="sd">        ::</span>
 
-<span class="sd">          row_col_operator = RowColOperator()</span>
-<span class="sd">          row_col_operator.set_ws = openpyxl.load_workbook(&#39;workbook_name&#39;)[&#39;worksheet_name&#39;]</span>
-<span class="sd">          row_col_operator.set_target_row = 16</span>
-<span class="sd">          print(row_col_operator.get_end_col())        </span>
-
+<span class="sd">            row_col_operator = RowColOperator()</span>
+<span class="sd">            row_col_operator.set_ws = openpyxl.load_workbook(&#39;workbook_name&#39;)[&#39;worksheet_name&#39;]</span>
+<span class="sd">            row_col_operator.set_target_row = 16</span>
+<span class="sd">            print(row_col_operator.get_end_col())</span>
+<span class="sd">        </span>
 <span class="sd">        ::</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_my_value_col</span><span class="p">():</span> <span class="k">return</span>

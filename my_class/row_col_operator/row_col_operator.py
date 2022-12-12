@@ -64,7 +64,7 @@ class RowColOperator:
 
     Note:
         The bellow variable must be set value before this function call.
-        :obj:`self.__ws`, :obj:`self.__target_col`
+        :data:`self.__ws`, :data:`self.__target_col`
 
     Args:
         Nothing.
@@ -81,11 +81,11 @@ class RowColOperator:
 
         ::
 
-          row_col_operator = RowColOperator()
-          row_col_operator.set_ws = openpyxl.load_workbook('workbook_name')['worksheet_name']
-          row_col_operator.set_target_col = 3
-          print(row_col_operator.get_end_row())
-        
+            row_col_operator = RowColOperator()
+            row_col_operator.set_ws = openpyxl.load_workbook('workbook_name')['worksheet_name']
+            row_col_operator.set_target_col = 3
+            print(row_col_operator.get_end_row())
+
         ::
     """
     if not self.check_my_value_row(): return
@@ -100,7 +100,7 @@ class RowColOperator:
 
     Note:
         The bellow variable must be set value before this function call.
-        :obj:`self.__ws`, :obj:`self.__target_row`
+        :data:`self.__ws`, :data:`self.__target_row`
 
     Args:
         Nothing.
@@ -117,11 +117,11 @@ class RowColOperator:
 
         ::
 
-          row_col_operator = RowColOperator()
-          row_col_operator.set_ws = openpyxl.load_workbook('workbook_name')['worksheet_name']
-          row_col_operator.set_target_row = 16
-          print(row_col_operator.get_end_col())        
-
+            row_col_operator = RowColOperator()
+            row_col_operator.set_ws = openpyxl.load_workbook('workbook_name')['worksheet_name']
+            row_col_operator.set_target_row = 16
+            print(row_col_operator.get_end_col())
+        
         ::
     """
     if not self.check_my_value_col(): return
