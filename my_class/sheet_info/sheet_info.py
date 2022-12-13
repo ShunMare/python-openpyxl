@@ -1,5 +1,5 @@
 import openpyxl
-from row_col_operator.row_col_operator import RowColOperator
+from ..row_col_operator.row_col_operator import RowColOperator
 
 class SheetInfo:
   """This class has the information of the Excel worksheet."""
@@ -162,8 +162,8 @@ class SheetInfo:
         Nothing.
     """
     if not self.check_my_value: return
-    self.set_wb(self.set_wb_name)
-    self.set_ws(self.set_ws_name)
+    self.set_wb = openpyxl.load_workbook(self.__wb_name)
+    self.set_ws = self.get_wb[self.__ws_name]
 
   def set_row_col_info(self):
     """Set end of row and column. 
@@ -180,7 +180,7 @@ class SheetInfo:
     row_col_operator.set_target_col = self.__target_col
 
     if (0 == self.__end_row) and (0 != self.__target_col):
-      self.set_end_row = row_col_operator.get_end_row
+      self.set_end_row = row_col_operator.get_end_row()
     
     if (0 == self.__end_col) and (0 != self.__target_row):
-      self.set_end_col = row_col_operator.get_end_col
+      self.set_end_col = row_col_operator.get_end_col()
